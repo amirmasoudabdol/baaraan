@@ -93,7 +93,7 @@ namespace mvrandom {
 
             tmp_.resize(p_.dims(), 1);
 
-            if (!p_.is_covs_diagmat())
+            // if (!p_.is_covs_diagmat())
                 factorize_covariance();
         }
 
