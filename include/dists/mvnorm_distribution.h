@@ -57,7 +57,7 @@ namespace mvrandom {
 
             arma::vec covs_diag() const { return covs_.diag(); }
 
-            bool is_covs_diagmat() const { return covs_.is_diagmat(); }
+            // bool is_covs_diagmat() const { return covs_.is_diagmat(); }
 
             friend
             bool operator==(const param_type &x, const param_type &y) {
@@ -122,7 +122,7 @@ namespace mvrandom {
 
             tmp_.resize(p_.dims());
 
-            if (!p_.is_covs_diagmat())
+            // if (!p_.is_covs_diagmat())
                 factorize_covariance();
         }
 
@@ -162,11 +162,11 @@ namespace mvrandom {
     mvnorm_distribution<_RealType>::operator()(_URNG &g, const mvnorm_distribution<_RealType>::param_type &parm) {
 
         tmp_.imbue([&]() { return norm(g); });
-        if (parm.is_covs_diagmat()) {
-            return arma::sqrt(parm.covs_diag()) % tmp_ + parm.means();
-        } else {
+        // if (parm.is_covs_diagmat()) {
+        //     return arma::sqrt(parm.covs_diag()) % tmp_ + parm.means();
+        // } else {
             return covs_lower * tmp_ + parm.means();
-        }
+        // }
 
     }
 
