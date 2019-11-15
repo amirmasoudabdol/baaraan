@@ -23,16 +23,16 @@ endif()
 
 file(GLOB CPP_FILES *.cpp)
 
-find_package(BOOST REQUIRED)
+find_package(Boost REQUIRED)
 find_package(Armadillo REQUIRED)
 
 include_directories(include)
 include_directories(${ARMADILLO_INCLUDE_DIR})
-include_directories(${BOOST_INCLUDE_DIRS})
+include_directories(${Boost_INCLUDE_DIRS})
 
 add_library(mvrandom SHARED ${CPP_FILES})
 
-target_link_libraries(mvrandom ${ARMADILLO_LIBRARIES} ${BOOST_LIBRARIES})
+target_link_libraries(mvrandom ${ARMADILLO_LIBRARIES} ${Boost_LIBRARIES})
 
 write_basic_package_version_file(
         mvrandomConfigVersion.cmake
@@ -52,10 +52,10 @@ install(TARGETS mvrandom
 
 # Exposing config variables
 set(${PROJECT_NAME_CAP}_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/include
-                                     ${BOOST_INCLUDE_DIRS}
+                                     ${Boost_INCLUDE_DIRS}
                                      ${ARMADILLO_INCLUDE_DIRS}
         CACHE INTERNAL "${PROJECT_NAME}: Includes Directory" FORCE)
 
-set(${PROJECT_NAME_CAP}_DEFINITIONS ${BOOST_DEFINITIONS}
+set(${PROJECT_NAME_CAP}_DEFINITIONS ${Boost_DEFINITIONS}
                                     ${ARMADILLO_DEFINTIONS}
         CACHE INTERNAL "${PROJECT_NAME}: Definitions" FORCE)
