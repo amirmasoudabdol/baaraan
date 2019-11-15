@@ -64,7 +64,7 @@ namespace mvrandom {
 
             arma::vec covs_diag() const { return covs_.diag(); }
 
-            bool is_covs_diagmat() const { return covs_.is_diagmat(); }
+            // bool is_covs_diagmat() const { return covs_.is_diagmat(); }
 
             friend
             bool operator==(const param_type &x, const param_type &y) {
