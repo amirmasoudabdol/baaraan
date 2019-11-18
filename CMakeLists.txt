@@ -15,6 +15,7 @@ include(CheckLibraryExists)
 include(CMakePackageConfigHelpers)
 include(GNUInstallDirs)
 
+set(CMAKE_PREFIX_PATH "$ENV{HOME}/.local")
 
 if(NOT APPLE)
     set(CMAKE_INSTALL_RPATH ${ORIGIN})
