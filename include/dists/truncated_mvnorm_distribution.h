@@ -37,7 +37,7 @@ namespace mvrandom {
                 dims_ = means.n_elem;
 
                 // Checking whether dimensions matches
-                if (lowers_.n_rows != dims_ || uppers_.n_rows != dims_)
+                if (lowers_.n_elem != dims_ || uppers_.n_elem != dims_)
                     throw std::length_error("Check your arrays size");
 
                 if (!covs.is_symmetric() || !covs.is_square())
@@ -155,7 +155,7 @@ namespace mvrandom {
     truncated_mvnorm_distribution<_RealType>::operator()(_URNG &g,
                                                          const truncated_mvnorm_distribution<_RealType>::param_type &parm) {
 
-        int n{5};
+        int n {1};
         int d = parm.dims();
         arma::mat trace = arma::zeros(n, d); // trace of MCMC chain
 
