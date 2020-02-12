@@ -173,9 +173,9 @@ namespace mvrandom {
 
         for (int i = 0; i < d; i++) {
             //partitioning of sigma
-            arma::mat Sigma = sub1(parm.covs(), i);
-            double sigma_ii = parm.covs()(i, i);
-            arma::rowvec Sigma_i = sub2(parm.covs(), i, i);
+            arma::mat Sigma = sub1(parm.sigma(), i);
+            double sigma_ii = parm.sigma()(i, i);
+            arma::rowvec Sigma_i = sub2(parm.sigma(), i, i);
 
             P.slice(i) = Sigma_i * Sigma.i();
             double p_i = arma::as_scalar(P.slice(i) * Sigma_i.t());
