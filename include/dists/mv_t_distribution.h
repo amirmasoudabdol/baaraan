@@ -21,7 +21,7 @@ namespace mvrandom {
             size_t dims_;
             int dof_;
             result_type means_;
-            result_type covs_;
+            result_type sigma_;
 
         public:
             typedef mv_t_distribution distribution_type;
@@ -33,11 +33,11 @@ namespace mvrandom {
 
                 dims_ = means.n_elem;
                 means_ = means;
-                covs_ = covs;
+                sigma_ = covs;
             }
 
-            explicit param_type(double dof, result_type means, result_type covs)
-                    : dof_(dof), dims_(means.n_elem), means_(means), covs_(covs) {
+            explicit param_type(double dof, result_type means, result_type sigma)
+                    : dof_(dof), dims_(means.n_elem), means_(means), sigma_(sigma) {
 
                 if (dof <= 0)
                 	throw std::logic_error("degress of freedom should be positive.");
@@ -45,10 +45,10 @@ namespace mvrandom {
                 if (!means.is_colvec())
                     throw std::logic_error("Mean should be a column vector.");
 
-                if (covs.n_rows != dims_)
+                if (sigma.n_rows != dims_)
                     throw std::length_error("Covariance matrix has the wrong dimension.");
 
-                if (!covs.is_symmetric() || !covs.is_square())
+                if (!sigma.is_symmetric() || !sigma.is_square())
                     throw std::logic_error("Covarinace matrix is not square or symmetrical.");
             }
 
@@ -60,9 +60,9 @@ namespace mvrandom {
 
             result_type means() const { return means_; }
 
-            result_type covs() const { return covs_; }
+            result_type sigma() const { return sigma_; }
 
-            arma::vec covs_diag() const { return covs_.diag(); }
+            arma::vec covs_diag() const { return sigma_.diag(); }
 
             // bool is_covs_diagmat() const { return covs_.is_diagmat(); }
 
@@ -70,7 +70,7 @@ namespace mvrandom {
             bool operator==(const param_type &x, const param_type &y) {
                 return x.dof_ == y.dof_ 
                 	   && arma::approx_equal(x.means_, y.means_, "absdiff", 0.001)
-                       && arma::approx_equal(x.covs_, y.covs_, "absdiff", 0.001);
+                       && arma::approx_equal(x.sigma_, y.sigma_, "absdiff", 0.001);
             }
 
             friend
@@ -123,7 +123,7 @@ namespace mvrandom {
 
         result_type means() const { return p_.means(); }
 
-        result_type covs() const { return p_.covs(); }
+        result_type sigma() const { return p_.sigma(); }
 
         param_type param() const { return p_; }
 

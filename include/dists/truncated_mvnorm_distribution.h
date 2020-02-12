@@ -24,15 +24,15 @@ namespace mvrandom {
         class param_type {
             size_t dims_;
             result_type means_;
-            result_type covs_;
+            result_type sigma_;
             result_type lowers_;
             result_type uppers_;
 
         public:
             typedef truncated_mvnorm_distribution distribution_type;
 
-            explicit param_type(result_type means, result_type covs, result_type lowers, result_type uppers)
-                    : means_(means), covs_(covs), lowers_(lowers), uppers_(uppers) {
+            explicit param_type(result_type means, result_type sigma, result_type lowers, result_type uppers)
+                    : means_(means), sigma_(sigma), lowers_(lowers), uppers_(uppers) {
 
                 dims_ = means.n_elem;
 
@@ -40,7 +40,7 @@ namespace mvrandom {
                 if (lowers_.n_elem != dims_ || uppers_.n_elem != dims_)
                     throw std::length_error("Check your arrays size");
 
-                if (!covs.is_symmetric() || !covs.is_square())
+                if (!sigma.is_symmetric() || !sigma.is_square())
                     throw std::logic_error("Covariance matrix is not symmetric.");
 
             }
@@ -49,7 +49,7 @@ namespace mvrandom {
 
             result_type means() const { return means_; }
 
-            result_type covs() const { return covs_; }
+            result_type sigma() const { return sigma_; }
 
             result_type lowers() const { return lowers_; }
 
@@ -118,14 +118,16 @@ namespace mvrandom {
         // property functions
         result_type means() const { return p_.means(); }
 
-        result_type covs() const { return p_.covs(); }
+        result_type sigma() const { return p_.sigma(); }
 
         param_type param() const { return p_; };
 
         void param(const param_type &params) { p_ = params; }
 
+        result_type lowers() const { return p_.lowers(); }
         result_type min() const { return p_.lowers(); }
 
+        result_type uppers() const { return p_.uppers(); }
         result_type max() const { return p_.uppers(); }
 
         friend bool operator==(const truncated_mvnorm_distribution &x,
