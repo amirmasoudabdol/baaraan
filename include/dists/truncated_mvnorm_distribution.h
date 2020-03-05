@@ -2,8 +2,8 @@
 // Created by Amir Masoud Abdol on 23/10/2019.
 //
 
-#ifndef MVRANDOM_TRUNCATED_MVNORM_DISTRIBUTION_H
-#define MVRANDOM_TRUNCATED_MVNORM_DISTRIBUTION_H
+#ifndef BAARAAN_TRUNCATED_MVNORM_DISTRIBUTION_H
+#define BAARAAN_TRUNCATED_MVNORM_DISTRIBUTION_H
 
 #include <random>
 #include <iostream>
@@ -12,7 +12,7 @@
 
 using boost::math::normal;
 
-namespace mvrandom {
+namespace baaraan {
 
     // Truncated Normal Distribution
     template<class _RealType = double>
@@ -216,4 +216,4 @@ namespace mvrandom {
 
 }
 
-#endif //MVRANDOM_TRUNCATED_MVNORM_DISTRIBUTION_H
+#endif //BAARAAN_TRUNCATED_MVNORM_DISTRIBUTION_H

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.2)
 
-project(mvrandom
+project(baaraan
         LANGUAGES CXX
         VERSION 0.1.0.0)
 set(${PROJECT_NAME}_VERSION_NAME "Appa")
@@ -8,7 +8,7 @@ set(${PROJECT_NAME}_VERSION_NAME "Appa")
 string(TOUPPER ${PROJECT_NAME} PROJECT_NAME_CAP)
 
 set(CMAKE_CXX_STANDARD 17)
-set(MVRANDOM_DIR ${CMAKE_PROGRAM_PATH})
+set(BAARAAN_DIR ${CMAKE_PROGRAM_PATH})
 
 include(CheckIncludeFileCXX)
 include(CheckLibraryExists)
@@ -31,18 +31,18 @@ include_directories(include)
 include_directories(${ARMADILLO_INCLUDE_DIR})
 include_directories(${Boost_INCLUDE_DIRS})
 
-add_library(mvrandom SHARED ${CPP_FILES})
+add_library(baaraan SHARED ${CPP_FILES})
 
-target_link_libraries(mvrandom ${ARMADILLO_LIBRARIES} ${Boost_LIBRARIES})
+target_link_libraries(baaraan ${ARMADILLO_LIBRARIES} ${Boost_LIBRARIES})
 
 write_basic_package_version_file(
-        mvrandomConfigVersion.cmake
+        baaraanConfigVersion.cmake
         VERSION ${CMAKE_PROJECT_VERSION}
         COMPATIBILITY SameMajorVersion
 )
 
 # Install scripts
-install(TARGETS mvrandom
+install(TARGETS baaraan
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
         COMPONENT           ${PROJECT_NAME_CAP}_Runtime
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}

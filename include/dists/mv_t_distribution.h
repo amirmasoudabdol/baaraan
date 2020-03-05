@@ -2,14 +2,14 @@
 // Created by Amir Masoud Abdol on 2019-10-28
 //
 
-#ifndef MVRANDOM_MV_T_DISTRIBUTION_H
-#define MVRANDOM_MV_T_DISTRIBUTION_H
+#ifndef BAARAAN_MV_T_DISTRIBUTION_H
+#define BAARAAN_MV_T_DISTRIBUTION_H
 
 #include <random>
 #include <iostream>
 #include <armadillo>
 
-namespace mvrandom {
+namespace baaraan {
 
 	template<class _RealType = double>
     class mv_t_distribution {
@@ -184,4 +184,4 @@ namespace mvrandom {
 }
 
 
-#endif // MVRANDOM_MV_T_DISTRIBUTION_H
+#endif // BAARAAN_MV_T_DISTRIBUTION_H

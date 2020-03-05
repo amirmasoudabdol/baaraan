@@ -2,14 +2,14 @@
 // Created by Amir Masoud Abdol on 2019-06-14.
 //
 
-#ifndef MVRANDOM_MVNORM_DISTRIBUTION_H
-#define MVRANDOM_MVNORM_DISTRIBUTION_H
+#ifndef BAARAAN_MVNORM_DISTRIBUTION_H
+#define BAARAAN_MVNORM_DISTRIBUTION_H
 
 #include <random>
 #include <iostream>
 #include <armadillo>
 
-namespace mvrandom {
+namespace baaraan {
 
     template<class _RealType = double>
     class mvnorm_distribution {
@@ -48,7 +48,7 @@ namespace mvrandom {
             }
 
             // TODO: I think I need a copy assignment operator for handling the sizes and special cases
-
+            
             size_t dims() const { return dims_; }
 
             result_type means() const { return means_; }
@@ -110,6 +110,7 @@ namespace mvrandom {
         result_type operator()(URNG &g, const param_type &parm);
 
         // property functions
+        
         result_type means() const { return p_.means(); }
 
         result_type sigma() const { return p_.sigma(); }
@@ -172,4 +173,4 @@ namespace mvrandom {
 
 }
 
-#endif //MVRANDOM_MVNORM_DISTRIBUTION_H
+#endif //BAARAAN_MVNORM_DISTRIBUTION_H
