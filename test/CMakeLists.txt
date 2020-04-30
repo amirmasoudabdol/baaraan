@@ -1,3 +1,5 @@
+cmake_minimum_required(VERSION 3.2)
+
 project(mvrandom_test CXX)
 
 # Setup Tests

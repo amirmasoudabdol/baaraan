@@ -7,7 +7,7 @@
 #include "boost/test/unit_test.hpp"
 #include "boost/histogram/histogram.hpp"
 
-#include "library.hpp"
+#include "dists/mvnorm_distribution.h"
 
 BOOST_AUTO_TEST_CASE( test1 )
 {
