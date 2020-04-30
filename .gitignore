@@ -107,6 +107,9 @@ fabric.properties
 # Xcode
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
 
+## Xcode Project
+xcode-project/
+
 ## User settings
 xcuserdata/
 
