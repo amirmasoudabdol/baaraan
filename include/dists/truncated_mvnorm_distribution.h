@@ -15,7 +15,7 @@ using boost::math::normal;
 namespace baaraan {
 
     // Truncated Normal Distribution
-    template<class _RealType = double>
+    template<class RealType = double>
     class truncated_mvnorm_distribution {
     public:
         // types
@@ -151,11 +151,11 @@ namespace baaraan {
     };
 
     // Implementation of rejection algorithm
-    template<class _RealType>
+    template<class RealType>
     template<class _URNG>
     truncated_mvnorm_distribution<double>::result_type
-    truncated_mvnorm_distribution<_RealType>::operator()(_URNG &g,
-                                                         const truncated_mvnorm_distribution<_RealType>::param_type &parm) {
+    truncated_mvnorm_distribution<RealType>::operator()(_URNG &g,
+                                                         const truncated_mvnorm_distribution<RealType>::param_type &parm) {
 
         int n {1};
         int d = parm.dims();

@@ -11,7 +11,7 @@
 
 namespace baaraan {
 
-	template<class _RealType = double>
+	template<class RealType = double>
     class mv_t_distribution {
     public:
         // types
@@ -143,9 +143,9 @@ namespace baaraan {
             inv_covs = inv_covs_lower.t() * inv_covs_lower;
         }
 
-        result_type min() const { return -std::numeric_limits<_RealType>::infinity(); }
+        result_type min() const { return -std::numeric_limits<RealType>::infinity(); }
 
-        result_type max() const { return std::numeric_limits<_RealType>::infinity(); }
+        result_type max() const { return std::numeric_limits<RealType>::infinity(); }
 
         friend bool operator==(const mv_t_distribution &x,
                                const mv_t_distribution &y) { return x.p_ == y.p_; }
@@ -167,10 +167,10 @@ namespace baaraan {
 
     };
 
-    template<class _RealType>
-    template<class _URNG>
+    template<class RealType>
+    template<class URNG>
     mv_t_distribution<double>::result_type
-    mv_t_distribution<_RealType>::operator()(_URNG &g, const mv_t_distribution<_RealType>::param_type &parm) {
+    mv_t_distribution<RealType>::operator()(URNG &g, const mv_t_distribution<RealType>::param_type &parm) {
 
         tmp_.imbue([&]() { return norm(g); });
         // if (parm.is_covs_diagmat()) {

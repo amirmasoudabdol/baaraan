@@ -13,11 +13,11 @@ using boost::math::normal;
 
 namespace baaraan {
 
-    template<class _RealType = double>
+    template<class RealType = double>
     class truncated_normal_distribution {
     public:
         // types
-        typedef _RealType result_type;
+        typedef RealType result_type;
 
         class param_type {
             result_type mean_;
@@ -64,11 +64,11 @@ namespace baaraan {
         void reset() { uniform.reset(); }
 
         // generating functions
-        template<class _URNG>
-        result_type operator()(_URNG &g) { return (*this)(g, p_); }
+        template<class URNG>
+        result_type operator()(URNG &g) { return (*this)(g, p_); }
 
-        template<class _URNG>
-        result_type operator()(_URNG &g, const param_type &p);
+        template<class URNG>
+        result_type operator()(URNG &g, const param_type &p);
 
         // property functions
         result_type mean() const { return p_.mean(); }
@@ -104,10 +104,10 @@ namespace baaraan {
                    truncated_normal_distribution<_RT> &x);
     };
 
-    template<class _RealType>
-    template<class _URNG>
-    _RealType
-    truncated_normal_distribution<_RealType>::operator()(_URNG &g, const param_type &parm) {
+    template<class RealType>
+    template<class URNG>
+    RealType
+    truncated_normal_distribution<RealType>::operator()(URNG &g, const param_type &parm) {
         double alpha = (parm.min() - parm.mean()) / parm.stddev();
         double beta = (parm.max() - parm.mean()) / parm.stddev();
 

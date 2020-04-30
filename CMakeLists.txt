@@ -28,6 +28,7 @@ find_package(Boost REQUIRED)
 find_package(Armadillo REQUIRED)
 
 include_directories(include)
+include_directories(include/dists)
 include_directories(${ARMADILLO_INCLUDE_DIR})
 include_directories(${Boost_INCLUDE_DIRS})
 
