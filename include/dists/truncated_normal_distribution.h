@@ -58,8 +58,8 @@ public:
   // constructors and reset functions
   explicit truncated_normal_distribution(result_type mean = 0,
                                          result_type stddev = 1,
-                                         result_type lower = -3,
-                                         result_type upper = 3)
+                                         result_type lower = -4,
+                                         result_type upper = 4)
       : p_(param_type(mean, stddev, lower, upper)) {}
 
   explicit truncated_normal_distribution(const param_type &p) : p_(p) {}
