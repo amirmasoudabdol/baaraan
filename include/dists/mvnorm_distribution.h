@@ -55,8 +55,6 @@ public:
       factorize_covariance();
     }
 
-    /// TODO: I need a copy assignment operator for sure
-
     size_t dims() const { return dims_; }
 
     vector_type means() const { return means_; }
