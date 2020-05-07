@@ -29,7 +29,7 @@ if (${ENABLE_TESTS})
                                 RUNTIME_OUTPUT_DIRECTORY
                                 ${CMAKE_CURRENT_SOURCE_DIR}/build/tests)
 
-        #Finally add it to test execution -
+        #Finally add it to tests execution -
         #Notice the WORKING_DIRECTORY and COMMAND
         add_test(NAME ${testName}
                     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/build/tests

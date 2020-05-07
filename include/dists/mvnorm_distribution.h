@@ -17,14 +17,13 @@ namespace baaraan {
 template <class RealType = double> class mvnorm_distribution {
 public:
   // types
-  typedef arma::mat result_type;
   typedef arma::Mat<RealType> matrix_type;
   typedef arma::Col<RealType> vector_type;
 
   class param_type {
     size_t dims_;
-    result_type means_;
-    result_type sigma_;
+    vector_type means_;
+    matrix_type sigma_;
 
   public:
     typedef mvnorm_distribution distribution_type;
@@ -52,10 +51,6 @@ public:
 
     matrix_type sigma() const { return sigma_; }
 
-    vector_type covs_diag() const { return sigma_.diag(); }
-
-    // bool is_covs_diagmat() const { return covs_.is_diagmat(); }
-
     friend bool operator==(const param_type &x, const param_type &y) {
       return arma::approx_equal(x.means_, y.means_, "absdiff", 0.001) &&
              arma::approx_equal(x.covs_, y.covs_, "absdiff", 0.001);
@@ -73,49 +68,40 @@ private:
   std::normal_distribution<> norm; // N~(0, 1)
 
   param_type p_;
-  result_type tmp_;
+  vector_type v_;
 
 public:
-  explicit mvnorm_distribution() : p_(param_type{}) { tmp_.resize(p_.dims()); };
-
   // constructor and reset functions
-  explicit mvnorm_distribution(result_type means, result_type covs)
-      : p_(param_type(means, covs)) {
-
-    // TODO: check if it's diagonal, initiate the diag model
-
-    tmp_.resize(p_.dims(), 1);
-
-    // if (!p_.is_covs_diagmat())
+  explicit mvnorm_distribution(vector_type means, matrix_type sigma)
+      : p_(param_type(means, sigma)) {
     factorize_covariance();
   }
 
-  explicit mvnorm_distribution(const param_type &p) : p_(p) {}
+  explicit mvnorm_distribution(const param_type &p) : p_(p) {
+    factorize_covariance();
+  }
 
   void reset() { norm.reset(); };
 
   // generating functions
-  template <class URNG> result_type operator()(URNG &g) {
+  template <class URNG> vector_type operator()(URNG &g) {
     return (*this)(g, p_);
   }
 
-  template <class URNG> result_type operator()(URNG &g, const param_type &parm);
+  template <class URNG> vector_type operator()(URNG &g, const param_type &p);
 
   // property functions
 
-  result_type means() const { return p_.means(); }
+  vector_type means() const { return p_.means(); }
 
-  result_type sigma() const { return p_.sigma(); }
+  matrix_type sigma() const { return p_.sigma(); }
 
   param_type param() const { return p_; }
 
-  void param(const param_type &params) {
+  void param(const param_type &p) {
     // TODO: This needs more checks.
-    p_ = params;
+    p_ = p;
 
-    tmp_.resize(p_.dims());
-
-    // if (!p_.is_covs_diagmat())
     factorize_covariance();
   }
 
@@ -159,15 +145,16 @@ public:
 
 template <class RealType>
 template <class URNG>
-mvnorm_distribution<double>::result_type
+typename mvnorm_distribution<RealType>::vector_type
 mvnorm_distribution<RealType>::operator()(
-    URNG &g, const mvnorm_distribution<RealType>::param_type &parm) {
+    URNG &g, const mvnorm_distribution<RealType>::param_type &p) {
 
-  tmp_.imbue([&]() { return norm(g); });
-  // if (parm.is_covs_diagmat()) {
-  //     return arma::sqrt(parm.covs_diag()) % tmp_ + parm.means();
+  v_.resize(p.dims(), 1);
+  v_.imbue([&]() { return norm(g); });
+  // if (p.is_covs_diagmat()) {
+  //     return arma::sqrt(p.covs_diag()) % v_ + p.means();
   // } else {
-  return covs_lower * tmp_ + parm.means();
+  return covs_lower * v_ + p.means();
   // }
 }
 

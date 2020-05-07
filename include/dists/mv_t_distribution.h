@@ -176,7 +176,7 @@ namespace baaraan {
         // if (parm.is_covs_diagmat()) {
         return arma::sqrt(parm.dof() / parm.covs_diag()) * tmp_ + parm.means();
         // } else {
-        //     return covs_lower * tmp_ + parm.means();
+        //     return covs_lower * v_ + parm.means();
         // }
 
     }
