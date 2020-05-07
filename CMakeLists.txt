@@ -30,6 +30,7 @@ find_package(Armadillo REQUIRED)
 
 include_directories(include)
 include_directories(include/dists)
+include_directories(include/probs)
 include_directories(${ARMADILLO_INCLUDE_DIR})
 include_directories(${Boost_INCLUDE_DIRS})
 

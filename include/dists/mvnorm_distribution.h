@@ -82,10 +82,11 @@ private:
 
 public:
   // constructor and reset functions
-  explicit mvnorm_distribution(vector_type means, matrix_type sigma)
-      : p_(param_type(means, sigma)) {}
 
   explicit mvnorm_distribution(const param_type &p) : p_(p) {}
+
+  explicit mvnorm_distribution(vector_type means, matrix_type sigma)
+      : p_(param_type(means, sigma)) {}
 
   void reset() { norm_.reset(); };
 
@@ -101,7 +102,8 @@ public:
     return (*this)(g, p_, n);
   }
 
-  template <class URNG> matrix_type operator()(URNG &g, const param_type &p, size_t n);
+  template <class URNG>
+  matrix_type operator()(URNG &g, const param_type &p, size_t n);
 
   // property functions
 
@@ -111,12 +113,7 @@ public:
 
   param_type param() const { return p_; }
 
-  void param(const param_type &p) {
-    // TODO: This needs more checks.
-    p_ = p;
-
-    //    factorize_covariance();
-  }
+  void param(const param_type &p) { p_ = p; }
 
 public:
   vector_type min() const {
@@ -172,12 +169,10 @@ mvnorm_distribution<RealType>::operator()(
 
   arma::mat res(p.dims(), n);
 
-  res.each_col([&](vector_type &col){col = (*this)(g, p); });
+  res.each_col([&](vector_type &col) { col = (*this)(g, p); });
 
   return res;
-
 }
-
 
 } // namespace baaraan
 

@@ -1,4 +1,5 @@
 #include "baaraan.hpp"
+#include "mvnorm.h"
 
 #include <iostream>
 
