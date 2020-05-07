@@ -18,20 +18,21 @@ namespace baaraan {
 template <class RealType = double> class truncated_mvnorm_distribution {
 public:
   // types
-  typedef arma::mat result_type;
+  typedef arma::Col<RealType> vector_type;
+  typedef arma::Mat<RealType> matrix_type;
 
   class param_type {
     size_t dims_;
-    result_type means_;
-    result_type sigma_;
-    result_type lowers_;
-    result_type uppers_;
+    vector_type means_;
+    matrix_type sigma_;
+    vector_type lowers_;
+    vector_type uppers_;
 
   public:
     typedef truncated_mvnorm_distribution distribution_type;
 
-    explicit param_type(result_type means, result_type sigma,
-                        result_type lowers, result_type uppers)
+    explicit param_type(vector_type means, matrix_type sigma,
+                        vector_type lowers, vector_type uppers)
         : means_(means), sigma_(sigma), lowers_(lowers), uppers_(uppers) {
 
       dims_ = means.n_elem;
@@ -46,13 +47,13 @@ public:
 
     size_t dims() const { return dims_; }
 
-    result_type means() const { return means_; }
+    vector_type means() const { return means_; }
 
-    result_type sigma() const { return sigma_; }
+    matrix_type sigma() const { return sigma_; }
 
-    result_type lowers() const { return lowers_; }
+    vector_type lowers() const { return lowers_; }
 
-    result_type uppers() const { return uppers_; }
+    vector_type uppers() const { return uppers_; }
 
     friend bool operator==(const param_type &x, const param_type &y) {
       return arma::approx_equal(x.means_, y.means_, "absdiff", 0.001) &&
@@ -93,35 +94,35 @@ private:
 
 public:
   // constructor and reset functions
-  explicit truncated_mvnorm_distribution(result_type means, result_type covs,
-                                         result_type lowers, result_type uppers)
-      : p_(param_type(means, covs, lowers, uppers)) {}
+  explicit truncated_mvnorm_distribution(vector_type means, matrix_type sigma,
+                                         vector_type lowers, vector_type uppers)
+      : p_(param_type(means, sigma, lowers, uppers)) {}
 
   explicit truncated_mvnorm_distribution(const param_type &p) : p_(p) {}
 
   void reset() { uniform.reset(); };
 
   // generating functions
-  template <class URNG> result_type operator()(URNG &g) {
+  template <class URNG> vector_type operator()(URNG &g) {
     return (*this)(g, p_);
   }
 
-  template <class URNG> result_type operator()(URNG &g, const param_type &parm);
+  template <class URNG> vector_type operator()(URNG &g, const param_type &p);
 
   // property functions
-  result_type means() const { return p_.means(); }
+  vector_type means() const { return p_.means(); }
 
-  result_type sigma() const { return p_.sigma(); }
+  matrix_type sigma() const { return p_.sigma(); }
 
   param_type param() const { return p_; };
 
   void param(const param_type &params) { p_ = params; }
 
-  result_type lowers() const { return p_.lowers(); }
-  result_type min() const { return p_.lowers(); }
+  vector_type lowers() const { return p_.lowers(); }
+  vector_type min() const { return p_.lowers(); }
 
-  result_type uppers() const { return p_.uppers(); }
-  result_type max() const { return p_.uppers(); }
+  vector_type uppers() const { return p_.uppers(); }
+  vector_type max() const { return p_.uppers(); }
 
   friend bool operator==(const truncated_mvnorm_distribution &x,
                          const truncated_mvnorm_distribution &y) {
@@ -147,12 +148,12 @@ public:
 // Implementation of rejection algorithm
 template <class RealType>
 template <class _URNG>
-truncated_mvnorm_distribution<double>::result_type
+typename truncated_mvnorm_distribution<RealType>::vector_type
 truncated_mvnorm_distribution<RealType>::operator()(
-    _URNG &g, const truncated_mvnorm_distribution<RealType>::param_type &parm) {
+    _URNG &g, const truncated_mvnorm_distribution<RealType>::param_type &p) {
 
   int n{1};
-  int d = parm.dims();
+  int d = p.dims();
   arma::mat trace = arma::zeros(n, d); // trace of MCMC chain
 
   // draw from U(0,1)
@@ -167,16 +168,16 @@ truncated_mvnorm_distribution<RealType>::operator()(
 
   for (int i = 0; i < d; i++) {
     // partitioning of sigma
-    arma::mat Sigma = sub1(parm.sigma(), i);
-    double sigma_ii = parm.sigma()(i, i);
-    arma::rowvec Sigma_i = sub2(parm.sigma(), i, i);
+    arma::mat Sigma = sub1(p.sigma(), i);
+    double sigma_ii = p.sigma()(i, i);
+    arma::rowvec Sigma_i = sub2(p.sigma(), i, i);
 
     P.slice(i) = Sigma_i * Sigma.i();
     double p_i = arma::as_scalar(P.slice(i) * Sigma_i.t());
     sd(i) = sqrt(sigma_ii - p_i);
   }
 
-  arma::vec x = parm.means();
+  arma::vec x = p.means();
 
   // run Gibbs sampler for specified chain length (MCMC chain of n samples)
   for (int j = 0; j < n; j++) {
@@ -188,11 +189,11 @@ truncated_mvnorm_distribution<RealType>::operator()(
       arma::rowvec slice_i = P.slice(i);
       arma::vec slice_i_times = slice_i * (negSubCol(x, i) - negSubCol(x, i));
       double slice_i_times_double = arma::as_scalar(slice_i_times);
-      double mu_i = parm.means()(i) + slice_i_times_double;
+      double mu_i = p.means()(i) + slice_i_times_double;
 
       // transformation
-      double Fa = cdf(normal{mu_i, sd(i)}, parm.lowers()(i));
-      double Fb = cdf(normal{mu_i, sd(i)}, parm.uppers()(i));
+      double Fa = cdf(normal{mu_i, sd(i)}, p.lowers()(i));
+      double Fb = cdf(normal{mu_i, sd(i)}, p.uppers()(i));
 
       x(i) = mu_i + sd(i) * quantile(normal{0, 1}, U(l) * (Fb - Fa) + Fa);
 

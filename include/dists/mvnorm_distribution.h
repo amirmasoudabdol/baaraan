@@ -25,6 +25,17 @@ public:
     vector_type means_;
     matrix_type sigma_;
 
+  private:
+    matrix_type covs_lower_;
+    matrix_type inv_covs_lower_;
+    matrix_type inv_covs_;
+
+    void factorize_covariance() {
+      covs_lower_ = arma::chol(sigma_, "lower");
+      inv_covs_lower_ = arma::inv(arma::trimatl(covs_lower_));
+      inv_covs_ = inv_covs_lower_.t() * inv_covs_lower_;
+    }
+
   public:
     typedef mvnorm_distribution distribution_type;
 
@@ -40,16 +51,20 @@ public:
       if (!sigma.is_symmetric() || !sigma.is_square())
         throw std::logic_error(
             "Covarinace matrix is not square or symmetrical.");
+
+      factorize_covariance();
     }
 
-    // TODO: I think I need a copy assignment operator for handling the
-    // sizes and special cases
+    /// TODO: I need a copy assignment operator for sure
 
     size_t dims() const { return dims_; }
 
     vector_type means() const { return means_; }
 
     matrix_type sigma() const { return sigma_; }
+
+    matrix_type covs_lower() const { return covs_lower_; }
+    matrix_type inv_covs() const { return inv_covs_; }
 
     friend bool operator==(const param_type &x, const param_type &y) {
       return arma::approx_equal(x.means_, y.means_, "absdiff", 0.001) &&
@@ -62,10 +77,7 @@ public:
   };
 
 private:
-  matrix_type covs_lower;
-  matrix_type inv_covs_lower;
-  matrix_type inv_covs;
-  std::normal_distribution<> norm; // N~(0, 1)
+  std::normal_distribution<> norm_; // N~(0, 1)
 
   param_type p_;
   vector_type v_;
@@ -73,15 +85,11 @@ private:
 public:
   // constructor and reset functions
   explicit mvnorm_distribution(vector_type means, matrix_type sigma)
-      : p_(param_type(means, sigma)) {
-    factorize_covariance();
-  }
+      : p_(param_type(means, sigma)) {}
 
-  explicit mvnorm_distribution(const param_type &p) : p_(p) {
-    factorize_covariance();
-  }
+  explicit mvnorm_distribution(const param_type &p) : p_(p) {}
 
-  void reset() { norm.reset(); };
+  void reset() { norm_.reset(); };
 
   // generating functions
   template <class URNG> vector_type operator()(URNG &g) {
@@ -89,6 +97,13 @@ public:
   }
 
   template <class URNG> vector_type operator()(URNG &g, const param_type &p);
+
+  // batch generation
+  template <class URNG> matrix_type operator()(URNG &g, size_t n) {
+    return (*this)(g, p_, n);
+  }
+
+  template <class URNG> matrix_type operator()(URNG &g, const param_type &p, size_t n);
 
   // property functions
 
@@ -102,14 +117,7 @@ public:
     // TODO: This needs more checks.
     p_ = p;
 
-    factorize_covariance();
-  }
-
-private:
-  void factorize_covariance() {
-    covs_lower = arma::chol(p_.sigma(), "lower");
-    inv_covs_lower = arma::inv(arma::trimatl(covs_lower));
-    inv_covs = inv_covs_lower.t() * inv_covs_lower;
+    //    factorize_covariance();
   }
 
 public:
@@ -150,13 +158,28 @@ mvnorm_distribution<RealType>::operator()(
     URNG &g, const mvnorm_distribution<RealType>::param_type &p) {
 
   v_.resize(p.dims(), 1);
-  v_.imbue([&]() { return norm(g); });
+  v_.imbue([&]() { return norm_(g); });
   // if (p.is_covs_diagmat()) {
   //     return arma::sqrt(p.covs_diag()) % v_ + p.means();
   // } else {
-  return covs_lower * v_ + p.means();
+  return p.covs_lower() * v_ + p.means();
   // }
 }
+
+template <class RealType>
+template <class URNG>
+typename mvnorm_distribution<RealType>::matrix_type
+mvnorm_distribution<RealType>::operator()(
+    URNG &g, const mvnorm_distribution<RealType>::param_type &p, size_t n) {
+
+  arma::mat res(p.dims(), n);
+
+  res.each_col([&](vector_type &col){col = (*this)(g, p); });
+
+  return res;
+
+}
+
 
 } // namespace baaraan
 

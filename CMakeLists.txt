@@ -21,10 +21,11 @@ if(NOT APPLE)
     set(CMAKE_INSTALL_RPATH ${ORIGIN})
 endif()
 
+set(ENABLE_TESTS ON)
 
 file(GLOB CPP_FILES *.cpp)
 
-find_package(Boost REQUIRED)
+find_package(Boost COMPONENTS unit_test_framework REQUIRED)
 find_package(Armadillo REQUIRED)
 
 include_directories(include)
@@ -35,6 +36,11 @@ include_directories(${Boost_INCLUDE_DIRS})
 add_library(baaraan SHARED ${CPP_FILES})
 
 target_link_libraries(baaraan ${ARMADILLO_LIBRARIES} ${Boost_LIBRARIES})
+
+if(${ENABLE_TESTS})
+    enable_testing()
+    add_subdirectory(tests)
+endif()
 
 write_basic_package_version_file(
         baaraanConfigVersion.cmake

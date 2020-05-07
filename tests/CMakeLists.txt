@@ -1,40 +1,47 @@
 cmake_minimum_required(VERSION 3.2)
 
-project(mvrandom_test CXX)
+project(baaraan_tests CXX)
 
-# Setup Tests
-if (${ENABLE_TESTS})
+include(CTest)
 
-    enable_testing()
-    file(GLOB TESTSOURCES "${CMAKE_PROGRAM_PATH}/test/*.cpp")
+file(GLOB TESTSOURCES "*.cpp")
 
-    #Run through each source
-    foreach(testSrc ${TESTSOURCES})
-        #Extract the filename without an extension (NAME_WE)
-        get_filename_component(testName ${testSrc} NAME_WE)
+message(STATUS "Configuring tests")
 
-        #Add compile target
-        add_executable(${testName} ${testSrc} ${SOURCES})
+find_package(Boost COMPONENTS unit_test_framework REQUIRED)
+find_package(Armadillo REQUIRED)
+find_package(Threads REQUIRED)
 
-        #link to Boost libraries AND your targets and dependencies
-        target_link_libraries(${testName}
-                                ${ARMADILLO_LIBRARIES}
-                                ${BOOST_LIBRARIES}
-                                ${BOOST_UNIT_TEST_FRAMEWORK_LIBRARY}
-                                )
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../include)
+include_directories(${ARMADILLO_INCLUDE_DIR})
+include_directories(${Boost_INCLUDE_DIRS})
 
-        #I like to move testing binaries into a build/tests directory
-        set_target_properties(${testName}
-                                PROPERTIES
-                                RUNTIME_OUTPUT_DIRECTORY
-                                ${CMAKE_CURRENT_SOURCE_DIR}/build/tests)
+#Run through each source
+foreach(testSrc ${TESTSOURCES})
+    #Extract the filename without an extension (NAME_WE)
+    get_filename_component(testName ${testSrc} NAME_WE)
 
-        #Finally add it to tests execution -
-        #Notice the WORKING_DIRECTORY and COMMAND
-        add_test(NAME ${testName}
-                    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/build/tests
-                    COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/build/tests/${testName} )
+    #Add compile target
+    add_executable(${testName} ${testSrc} ${SOURCES})
 
-    endforeach(testSrc)
+    #link to Boost libraries AND your targets and dependencies
+    target_link_libraries(${testName}
+                            ${ARMADILLO_LIBRARIES}
+                            ${BOOST_LIBRARIES}
+                            Boost::unit_test_framework
+                            )
 
-endif()
+    #I like to move testing binaries into a build/tests directory
+    set_target_properties(${testName}
+                            PROPERTIES
+                            RUNTIME_OUTPUT_DIRECTORY
+                            ${CMAKE_CURRENT_SOURCE_DIR}/build/tests)
+
+    #Finally add it to tests execution -
+    #Notice the WORKING_DIRECTORY and COMMAND
+    add_test(NAME ${testName}
+                WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/build/tests
+                COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/build/tests/${testName} )
+
+endforeach(testSrc)
+

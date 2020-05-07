@@ -51,8 +51,8 @@ public:
 
 private:
   param_type p_;
-  normal unit_normal;
-  std::uniform_real_distribution<> uniform;
+  normal unit_normal_;
+  std::uniform_real_distribution<> uniform_;
 
 public:
   // constructors and reset functions
@@ -64,7 +64,7 @@ public:
 
   explicit truncated_normal_distribution(const param_type &p) : p_(p) {}
 
-  void reset() { uniform.reset(); }
+  void reset() { uniform_.reset(); }
 
   // generating functions
   template <class URNG> result_type operator()(URNG &g) {
@@ -115,12 +115,12 @@ truncated_normal_distribution<RealType>::operator()(URNG &g,
   double alpha = (parm.lower() - parm.mean()) / parm.stddev();
   double beta = (parm.upper() - parm.mean()) / parm.stddev();
 
-  double alpha_cdf = cdf(unit_normal, alpha);
-  double beta_cdf = cdf(unit_normal, beta);
+  double alpha_cdf = cdf(unit_normal_, alpha);
+  double beta_cdf = cdf(unit_normal_, beta);
 
-  double u = uniform(g);
+  double u = uniform_(g);
   double xi_cdf = alpha_cdf + u * (beta_cdf - alpha_cdf);
-  double xi = quantile(unit_normal, xi_cdf);
+  double xi = quantile(unit_normal_, xi_cdf);
 
   double x = parm.mean() + parm.stddev() * xi;
 
