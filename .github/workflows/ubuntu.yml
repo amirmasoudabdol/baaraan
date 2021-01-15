@@ -1,11 +1,11 @@
-name: macOS
+name: Ubuntu
 
 on: [push, pull_request]
 
 jobs:
   build:
 
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Cloning the Repository
@@ -15,8 +15,10 @@ jobs:
 
       - name: Installing Dependencies
         run: |
-          brew install boost 
-          brew install armadillo
+          sudo apt install -y libboost-dev
+          sudo apt install -y libopenblas-dev liblapack-dev libarpack2-dev libsuperlu-dev
+          sudo apt install -y libarmadillo-dev
+          sudo apt install -y nlohmann-json3-dev
 
       - name: Configuring CMake
         run: cmake -S . -B build
