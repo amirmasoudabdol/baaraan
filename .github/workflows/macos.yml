@@ -1,0 +1,27 @@
+name: macOS
+
+on:
+  push:
+    branches: [ devel ]
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+
+    steps:
+      - name: checkout the main repo
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.PRIVATE_ACCESS }}
+
+      - name: dependencies
+        run: |
+          brew install boost 
+          brew install armadillo
+
+      - name: cmake 
+        run: cmake -S . -B build
+
+      - name: build
+        run: cmake --build build --parallel 10
