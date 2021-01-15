@@ -1,3 +1,5 @@
+[![macOS](https://github.com/amirmasoudabdol/baaraan/workflows/macOS/badge.svg)](https://github.com/amirmasoudabdol/baaraan/actions?query=workflow%3AmacOS)
+
 # Baaraan
 
 Baaraan is a collection of some of the missing random number distributions in C++ Standard Library, STL. For the start, I am planning to provide some of the multivariate distributions, e.g., Multi-variate Normal Distribution, and slowly hopefully expanding the list and even adding some noise functions to the library.
