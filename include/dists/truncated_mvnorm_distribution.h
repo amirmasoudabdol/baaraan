@@ -152,15 +152,15 @@ typename truncated_mvnorm_distribution<RealType>::vector_type
 truncated_mvnorm_distribution<RealType>::operator()(
     _URNG &g, const truncated_mvnorm_distribution<RealType>::param_type &p) {
 
-  int n{1};
-  int d = p.dims();
+  auto n{1};
+  auto d = p.dims();
   arma::mat trace = arma::zeros(n, d); // trace of MCMC chain
 
   // draw from U(0,1)
   arma::vec U(n * d);
   U.imbue([&]() { return uniform(g); });
 
-  int l = 0; // iterator for U
+  auto l{0}; // iterator for U
 
   // calculate conditional standard deviations
   arma::vec sd(d);
