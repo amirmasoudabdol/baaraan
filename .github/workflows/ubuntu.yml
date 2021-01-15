@@ -15,9 +15,10 @@ jobs:
 
       - name: Installing Dependencies
         run: |
-          sudo apt install -y libboost-dev
-          sudo apt install -y libopenblas-dev liblapack-dev libarpack2-dev libsuperlu-dev
-          sudo apt install -y libarmadillo-dev
+          sudo apt-get install -y libboost-dev
+          sudo apt-get libboost-test-dev 
+          sudo apt-get install -y libopenblas-dev liblapack-dev libarpack2-dev libsuperlu-dev
+          sudo apt-get install -y libarmadillo-dev
 
       - name: Configuring CMake
         run: cmake -S . -B build
