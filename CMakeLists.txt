@@ -36,9 +36,10 @@ include_directories(include/probs)
 include_directories(${ARMADILLO_INCLUDE_DIR})
 include_directories(${Boost_INCLUDE_DIRS})
 
-add_library(baaraan SHARED ${CPP_FILES})
+add_library(baaraan INTERFACE)
+add_library(baaraan::baaraan ALIAS baaraan)
 
-target_link_libraries(baaraan ${ARMADILLO_LIBRARIES} ${Boost_LIBRARIES})
+target_link_libraries(baaraan INTERFACE ${ARMADILLO_LIBRARIES} ${Boost_LIBRARIES})
 
 if(${ENABLE_TESTS})
   enable_testing()
