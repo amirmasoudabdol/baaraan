@@ -8,6 +8,7 @@
 #include <iostream>
 #include <random>
 
+#include "boost/math/distributions/normal.hpp"
 using boost::math::normal;
 
 namespace baaraan {
