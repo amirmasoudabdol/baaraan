@@ -9,22 +9,7 @@ Baaraan (Farsi: باران, baran | bârân |) is a collection of [STL's](https:
 
 > Baaraan is derived from [_baran_](https://en.wiktionary.org/wiki/باران), the Farsi word for _rain_. 
 
-> **Disclaimer:** I am in the process of testing and open-sourcing baaraan, so, please do not use it in production unless you have done the test yourself! 
-
-<div class="p-1">
-  <div class="Toast Toast--error">
-    <span class="Toast-icon">
-      <!-- <%= octicon "stop" %> -->
-      <svg width="14" height="16" viewBox="0 0 14 16" class="octicon octicon-stop" aria-hidden="true">
-        <path
-          fill-rule="evenodd"
-          d="M10 1H4L0 5v6l4 4h6l4-4V5l-4-4zm3 9.5L9.5 14h-5L1 10.5v-5L4.5 2h5L13 5.5v5zM6 4h2v5H6V4zm0 6h2v2H6v-2z"
-        />
-      </svg>
-    </span>
-    <span class="Toast-content">**Disclaimer:** I am in the process of testing and open-sourcing baaraan, so, please do not use it in production unless you have done the test yourself!</span>
-  </div>
-</div>
+> 🚨 **Disclaimer:** I am in the process of testing and open-sourcing baaraan, so, please do not use it in production unless you have done the test yourself! 
 
 For the most part, Baaraan's random number distributions are sharing the same interface and implementation details as their STL counterparts. First advantages of this is that they will look and behave very familiar. Moreover, they can adapt to your setup, for example, they will work with different URNGs out of the box.
 
