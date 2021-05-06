@@ -24,10 +24,7 @@ option(ENABLE_TESTS OFF)
 
 file(GLOB CPP_FILES *.cpp)
 
-find_package(
-  Boost
-  COMPONENTS unit_test_framework
-  REQUIRED)
+find_package(Boost)
 find_package(Armadillo REQUIRED)
 
 include_directories(include)
