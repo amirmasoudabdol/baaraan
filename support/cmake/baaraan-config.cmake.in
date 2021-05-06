@@ -1,0 +1,7 @@
+@PACKAGE_INIT@
+
+include(${CMAKE_CURRENT_LIST_DIR}/baaraanTargets.cmake)
+
+set(BAARAAN_LIBRARIES baaraan)
+
+check_required_components(baaraan)

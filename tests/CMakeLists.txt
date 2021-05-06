@@ -15,7 +15,7 @@ find_package(
 find_package(Armadillo REQUIRED)
 find_package(Threads REQUIRED)
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../include/baaraan)
 include_directories(${ARMADILLO_INCLUDE_DIR})
 include_directories(${Boost_INCLUDE_DIRS})
 
