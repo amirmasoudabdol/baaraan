@@ -80,17 +80,14 @@ After installing and linking baaraan to your project, you should be able to simp
 
 int main(int argc, char const *argv[])
 {
-	arma::mat sample(3, 10000);
-
 	arma::vec means {1, 2, 3};
 	arma::mat sigma{{1, 0, 0}, {0, 1, 0}, {0, 0, 1}};
 	
 	std::mt19937 gen(42);
 	mvnorm_distribution<double> mvnorm{means, sigma};
 
-	sample.each_col([&](arma::vec &v){v = mvnorm(gen);});
+	std::cout << mvnorm(gen) << std::endl;
 
-	std::cout << arma::mean(sample, 1);
 	return 0;
 }
 ```
