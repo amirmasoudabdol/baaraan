@@ -78,19 +78,35 @@ After installing and linking baaraan to your project, you should be able to simp
 #include <iostream>
 #include "baaraan/dists/mvnorm_distribution.h"
 
+using namespace baaraan;
+
 int main(int argc, char const *argv[])
 {
-	arma::mat sample(3, 10000);
+  arma::mat sample(3, 10000);
 
-	arma::vec means {1, 2, 3};
-	arma::mat sigma{{1, 0, 0}, {0, 1, 0}, {0, 0, 1}};
-	
-	std::mt19937 gen(42);
-	mvnorm_distribution<double> mvnorm{means, sigma};
+  arma::vec means {1, 2, 3};
+  arma::mat sigma{{1, 0, 0}, {0, 1, 0}, {0, 0, 1}};
+    
+  std::mt19937 gen(42);
+  mvnorm_distribution<double> mvnorm{means, sigma};
 
-	sample.each_col([&](arma::vec &v){v = mvnorm(gen);});
+  sample.each_col([&](arma::vec &v){v = mvnorm(gen);});
 
-	std::cout << arma::mean(sample, 1);
-	return 0;
+  std::cout << arma::mean(sample, 1);
+  return 0;
 }
+```
+
+Your `CMakeLists.txt` should look something like this:
+
+```cmake
+cmake_minimum_required(VERSION 3.20)
+project(rain)
+
+set(CMAKE_CXX_STANDARD 14)
+
+find_package(baaraan)
+
+add_executable(rain main.cpp)
+target_link_libraries(rain baaraan)
 ```
