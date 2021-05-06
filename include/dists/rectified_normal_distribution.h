@@ -104,6 +104,6 @@ rectified_normal_distribution<RealType>::operator()(URNG &g,
   return max(0, norm_(g, parm));
 }
 
-}; // namespace baaraan
+} // namespace baaraan
 
 #endif // BAARAAN_RECTIFIED_NORMAL_DISTRIBUTION_H

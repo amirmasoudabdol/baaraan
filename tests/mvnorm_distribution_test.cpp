@@ -15,11 +15,6 @@
 
 using namespace baaraan;
 
-BOOST_AUTO_TEST_CASE( mvnorm_constructor )
-{
-
-}
-
 BOOST_AUTO_TEST_CASE( mvnorm_means_test )
 {
 

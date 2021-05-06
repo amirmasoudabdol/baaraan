@@ -127,6 +127,6 @@ truncated_normal_distribution<RealType>::operator()(URNG &g,
   return x;
 }
 
-}; // namespace baaraan
+} // namespace baaraan
 
 #endif // BAARAAN_TRUNCATED_NORMAL_DISTRIBUTION_H

@@ -18,8 +18,11 @@ jobs:
           brew install boost 
           brew install armadillo
 
-      - name: Configuring CMake
-        run: cmake -S . -B build
+      - name: Configure
+        run: cmake -S . -B build/ -DENABLE_TESTS=ON
 
-      - name: Building Baaraan
-        run: cmake --build build --parallel 10
+      - name: Build
+        run: cmake --build build/ --parallel 10
+
+      - name: Test
+        run: cmake --build build/ --target test
