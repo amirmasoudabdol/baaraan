@@ -20,7 +20,7 @@ if(NOT APPLE)
   set(CMAKE_INSTALL_RPATH ${ORIGIN})
 endif()
 
-set(ENABLE_TESTS OFF)
+option(ENABLE_TESTS OFF)
 
 file(GLOB CPP_FILES *.cpp)
 

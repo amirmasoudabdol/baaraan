@@ -21,7 +21,7 @@ jobs:
           sudo apt-get install -y libarmadillo-dev
 
       - name: Configure
-        run: cmake -S . -B build/ -DENABLE_TESTS=ON
+        run: cmake -DENABLE_TESTS=ON -S . -B build/
 
       - name: Build
         run: cmake --build build/ --parallel 10
