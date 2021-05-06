@@ -32,24 +32,6 @@ For the actual probability distribution implementation, i.e., density, probabili
 **Rectified:**
 - [Rectified Normal](https://en.wikipedia.org/wiki/Rectified_Gaussian_distribution)
 
-## Qucick Start
-
-You can add baaraan to your project by copying it to your project folder, and setting it as a subfolder in your `CMakeLists.txt`. First you need to clone the repo, and copy it to your project folder:
-
-```bash
-git clone https://github.com/amirmasoudabdol/baaraan
-cp -r baaraan your-project/
-```
-
-and now you can add it to your CMake project:
-
-```cmake
-add_subdirectory(baaraan)
-
-# don't forget to link it to your executable or library
-target_link_libraries(your-project baaraan) 
-```
-
 ## Installation
 
 Alternatively, you can build and install baaraan first, and use CMake's `find_package` command to add it to your project:
