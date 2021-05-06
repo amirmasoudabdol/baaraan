@@ -13,8 +13,8 @@ set(BAARAAN_DIR ${CMAKE_PROGRAM_PATH})
 
 include(CheckIncludeFileCXX)
 include(CheckLibraryExists)
-include(CMakePackageConfigHelpers)
 include(GNUInstallDirs)
+include(CMakePackageConfigHelpers)
 
 if(NOT APPLE)
   set(CMAKE_INSTALL_RPATH ${ORIGIN})
@@ -46,28 +46,37 @@ if(${ENABLE_TESTS})
   add_subdirectory(tests)
 endif()
 
-write_basic_package_version_file(
-  baaraanConfigVersion.cmake
-  VERSION ${CMAKE_PROJECT_VERSION}
-  COMPATIBILITY SameMajorVersion)
 
-# Install scripts
-install(
-  TARGETS baaraan
-  RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-          COMPONENT ${PROJECT_NAME_CAP}_Runtime
-  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-          COMPONENT ${PROJECT_NAME_CAP}_Runtime
-          NAMELINK_COMPONENT ${PROJECT_NAME_CAP}_Development
-  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-          COMPONENT ${PROJECT_NAME_CAP}_Development)
+# define project variables
+set(BAARAAN_TARGET_NAME ${PROJECT_NAME})
+set(BAARAAN_PACKAGE_NAME ${BAARAAN_TARGET_NAME})
+set(BAARAAN_TARGETS_FILENAME "${BAARAAN_PACKAGE_NAME}Targets.cmake")
+set(BAARAAN_CONFIG_FILENAME "${BAARAAN_PACKAGE_NAME}Config.cmake")
+set(BAARAAN_CONFIGVERSION_FILENAME "${BAARAAN_PACKAGE_NAME}ConfigVersion.cmake")
+set(BAARAAN_CONFIG_DESTINATION "cmake")
+set(BAARAAN_INCLUDE_DESTINATION "include")
 
-# Exposing config variables
-set(${PROJECT_NAME_CAP}_INCLUDE_DIRS
-    ${PROJECT_SOURCE_DIR}/include ${Boost_INCLUDE_DIRS}
-    ${ARMADILLO_INCLUDE_DIRS}
-    CACHE INTERNAL "${PROJECT_NAME}: Includes Directory" FORCE)
+# generate a config and config version file for the package
+configure_package_config_file("support/cmake/baaraan-config.cmake.in"
+                              "${CMAKE_CURRENT_BINARY_DIR}/${BAARAAN_CONFIG_FILENAME}"
+                              INSTALL_DESTINATION ${BAARAAN_CONFIG_DESTINATION}
+                              PATH_VARS BAARAAN_INCLUDE_DESTINATION)
+write_basic_package_version_file("${CMAKE_CURRENT_BINARY_DIR}/${BAARAAN_CONFIGVERSION_FILENAME}"
+                                 COMPATIBILITY SameMajorVersion)
+    
+# export the library target and store build directory in package registry
+export(TARGETS ${BAARAAN_TARGET_NAME}
+       FILE "${CMAKE_CURRENT_BINARY_DIR}/${BAARAAN_TARGETS_FILENAME}")
+export(PACKAGE ${BAARAAN_PACKAGE_NAME})
 
-set(${PROJECT_NAME_CAP}_DEFINITIONS
-    ${Boost_DEFINITIONS} ${ARMADILLO_DEFINTIONS}
-    CACHE INTERNAL "${PROJECT_NAME}: Definitions" FORCE)
+# install library target and config files
+install(TARGETS ${BAARAAN_TARGET_NAME}
+        EXPORT ${BAARAAN_PACKAGE_NAME})
+install(DIRECTORY "include/baaraan"
+        DESTINATION ${BAARAAN_INCLUDE_DESTINATION})
+install(EXPORT ${BAARAAN_PACKAGE_NAME}
+        FILE ${BAARAAN_TARGETS_FILENAME}
+        DESTINATION ${BAARAAN_CONFIG_DESTINATION})
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${BAARAAN_CONFIG_FILENAME}"
+              "${CMAKE_CURRENT_BINARY_DIR}/${BAARAAN_CONFIGVERSION_FILENAME}"
+        DESTINATION ${BAARAAN_CONFIG_DESTINATION})
