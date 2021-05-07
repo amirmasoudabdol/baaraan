@@ -5,9 +5,7 @@
 
 # Baaraan
 
-Baaraan (Farsi: باران, baran, | bârân |) is a collection of [STL's](https://en.cppreference.com/w/cpp/numeric/random) missing random number distributions for C++. For the start, some of the more important and useful distributions are implemented and tests, e.g., Multivariate Normal Distribution, and I am hopping that I can slowly expand the list of the distributions, and maybe even add some noise functions to the library as well.
-
-> Baaraan is derived from [_baran_](https://en.wiktionary.org/wiki/باران), the Farsi word for _rain_. 
+Baaraan (Farsi: باران, [_baran_](https://en.wiktionary.org/wiki/باران), | bârân |) is a collection of missing multivariate random number generators for Modern C++ with [STL](https://en.cppreference.com/w/cpp/numeric/random)-like API. For the start, some of the more important and useful distributions are implemented and tests, e.g., Multivariate Normal Distribution, and I am hopping to slowly expand the list of the distributions, and maybe even add some noise functions to the library as well.
 
 > 🚨 **Disclaimer:** I am in the process of testing and open-sourcing baaraan, so, please do not use it in production unless you have done the test yourself! 
 
