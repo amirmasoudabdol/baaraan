@@ -89,3 +89,17 @@ find_package(baaraan)
 add_executable(rain main.cpp)
 target_link_libraries(rain baaraan)
 ```
+
+
+# Misc.
+
+## TODO
+
+- [ ] Implement more tests
+- [ ] Implement more distributions
+- [ ] Add more documentations
+- [ ] Add more examples
+
+## Support
+
+If you enjoy using `baaraan`, please consider supporting it on [GitHub](https://github.com/sponsors/amirmasoudabdol). You can sponsor me monthly, or make a one-time donation! 🤗
