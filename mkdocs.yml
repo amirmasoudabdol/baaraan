@@ -1,8 +1,5 @@
 site_name: baaraan
 
 nav:
-  - Home: index.md
-  - API:
-      - Modules: doxygen/Modules
-      - Classes: doxygen/Classes
-      - Files: doxygen/Files
+  - Home: /
+  - Classes: doxygen/Classes
