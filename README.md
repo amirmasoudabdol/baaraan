@@ -3,11 +3,12 @@
 
 <img src="docs/img/logo.png" width="250" align="right"/>
 
+> 🚨 **Disclaimer:** I am in the process of testing and open-sourcing baaraan, please do not use it in production unless you have done the test yourself! 
+
 # Baaraan
 
 Baaraan (Farsi: باران, [_baran_](https://en.wiktionary.org/wiki/باران), | bârân |) is a collection of missing multivariate random number distributions for Modern C++ with [STL](https://en.cppreference.com/w/cpp/numeric/random)-like API. For the start, some of the more important and useful distributions are implemented and tests, e.g., Multivariate Normal Distribution, and I am hopping to slowly expand the list of the distributions, and maybe even add some noise functions to the library as well.
 
-> 🚨 **Disclaimer:** I am in the process of testing and open-sourcing baaraan, so, please do not use it in production unless you have done the test yourself! 
 
 For the most part, Baaraan's random number distributions are sharing the same interface and implementation details as their STL counterparts. First advantages of this is that they will look and behave very familiar. Moreover, they can adapt to your setup, for example, they will work with different URNGs out of the box. 
 
