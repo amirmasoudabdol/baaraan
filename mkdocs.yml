@@ -31,6 +31,17 @@ theme:
     - header.hide
   logo: img/baaraan-logo-rect.png
   favicon: img/baaraan-logo.ico
+  icon:
+    repo: fontawesome/brands/github
+
+repo_name: GitHub
+repo_url: https://github.com/amirmasoudabdol/baaraan
+edit_uri: edit/main/docs
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/amirmasoudabdol
 
 
 custom_dir: overrides

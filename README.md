@@ -105,7 +105,7 @@ target_link_libraries(rain baaraan)
 
 ## License 
 
-Baaraan project is licensed under the [Apache License 2.0](https://opensource.org/licenses/Apache-2.0).
+Baaraan project is licensed under the [Apache License 2.0](https://opensource.org/licenses/Apache-2.0). Baaraan can be used in proprietary software, without releasing the source code. However, any software that incorporates or distributes Baaraan in source or binary form must include a readable copy of the attributions in the NOTICE.txt file that comes with Baaraan.
 
 ## TODO
 
@@ -114,6 +114,7 @@ Baaraan project is licensed under the [Apache License 2.0](https://opensource.or
 - [ ] Add more documentations
 - [ ] Add more examples
 - [ ] Add support for single header include
+- [ ] Implement some concurrent random number generation 
 
 ## Support
 
