@@ -7,8 +7,7 @@
 
 # Baaraan
 
-Baaraan (Farsi: باران, [_baran_](https://en.wiktionary.org/wiki/باران), | bârân |) is a collection of missing multivariate random number distributions for Modern C++ with [STL](https://en.cppreference.com/w/cpp/numeric/random)-like API. For the start, some of the more important and useful distributions are implemented and tests, e.g., Multivariate Normal Distribution, and I am hopping to slowly expand the list of the distributions, and maybe even add some noise functions to the library as well.
-
+Baaraan (Farsi: باران, [_baran_](https://en.wiktionary.org/wiki/باران), | bârân |) is a collection of missing multivariate random number distributions for Modern C++ with [STL](https://en.cppreference.com/w/cpp/numeric/random)-like API. For the start, some of the more important and useful distributions are implemented and tested, e.g., Multivariate Normal Distribution, and I am hopping to slowly expand the list of the distributions, and maybe even add some noise functions to the library later on.
 
 For the most part, Baaraan's random number distributions are sharing the same interface and implementation details as their STL counterparts. First advantages of this is that they will look and behave very familiar. Moreover, they can adapt to your setup, for example, they will work with different URNGs out of the box. 
 
@@ -22,14 +21,16 @@ For the actual probability distribution implementation, i.e., density, probabili
 - [Multivariate Normal](https://en.wikipedia.org/wiki/Multivariate_normal_distribution)
 - [Multivariate t-Student Distibution](https://en.wikipedia.org/wiki/Multivariate_t-distribution?wprov=sfti1)
 
-
 **Truncated:**
 - [Truncated Normal](https://en.wikipedia.org/wiki/Truncated_normal_distribution)
 - [Truncated Multivariate Normal](https://en.wikipedia.org/wiki/Truncated_normal_distribution)
 
-
 **Rectified:**
 - [Rectified Normal](https://en.wikipedia.org/wiki/Rectified_Gaussian_distribution)
+
+## Documentation
+
+For full documentation and implementation details please visit, [baaraan.amirmasoudabdol.name](https://baaraan.amirmasoudabdol.name).
 
 ## Installation
 

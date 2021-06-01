@@ -1,6 +1,10 @@
-//
-// Created by Amir Masoud Abdol on 12/03/2020.
-//
+///
+/// Created by Amir Masoud Abdol on 12/03/2020.
+///
+/// @file 
+/// 
+/// @defgroup   UnivariateDistributions Univariate Random Distributions
+/// @brief      List of available univariate random distributions
 
 #ifndef BAARAAN_TRUNCATED_NORMAL_DISTRIBUTION_H
 #define BAARAAN_TRUNCATED_NORMAL_DISTRIBUTION_H
@@ -13,6 +17,13 @@ using boost::math::normal;
 
 namespace baaraan {
 
+///
+/// @brief      This class describes a truncated normal distribution.
+///
+/// @tparam     RealType  Indicates the type of return values
+///
+/// @ingroup    UnivariateDistributions
+/// 
 template <class RealType = double> class truncated_normal_distribution {
 public:
   // types

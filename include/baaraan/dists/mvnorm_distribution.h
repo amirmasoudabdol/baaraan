@@ -1,9 +1,13 @@
 ///
 /// Created by Amir Masoud Abdol on 2019-06-14.
 ///
-/// \file
+/// @file
 /// This file contains the implementation of the multivariate normal
 /// random distribution, a.k.a, mvnorm
+/// 
+/// @defgroup MultivariateDistribution Multivariate Random Distributions
+/// @brief List of supported multivariate random distributions
+/// 
 
 #ifndef BAARAAN_MVNORM_DISTRIBUTION_H
 #define BAARAAN_MVNORM_DISTRIBUTION_H
@@ -14,6 +18,13 @@
 
 namespace baaraan {
 
+///
+/// @brief      Multivariate Normal Random Distribution
+///
+/// @tparam     RealType  Indicates the type of return values
+/// 
+/// @ingroup    MultivariateDistribution
+///
 template <class RealType = double> class mvnorm_distribution {
 public:
   // types

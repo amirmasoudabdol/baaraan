@@ -1,5 +1,36 @@
-site_name: baaraan
+site_name: BAARAAN
 
 nav:
-  - Home: /
-  - Classes: doxygen/Classes
+  # - Home: index.md
+  - API:
+    - Classes: doxygen/Classes
+    - Modules: doxygen/Modules
+
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: light blue
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: light blue
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+  font: false
+  include_homepage_in_sidebar: false
+  highlightjs: true
+  features:
+    - tab
+    - instant
+    - header.hide
+  logo: img/baaraan-logo-rect.png
+  favicon: img/baaraan-logo.ico
+
+
+custom_dir: overrides

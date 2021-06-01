@@ -1,6 +1,10 @@
-//
-// Created by Amir Masoud Abdol on 2019-10-28
-//
+///
+/// Created by Amir Masoud Abdol on 2019-10-28
+///
+/// @file 
+/// This file contains the implementation of multivariate t-distribution random
+/// distribution.
+/// 
 
 #ifndef BAARAAN_MV_T_DISTRIBUTION_H
 #define BAARAAN_MV_T_DISTRIBUTION_H
@@ -11,6 +15,13 @@
 
 namespace baaraan {
 
+///
+/// @brief      Multivariate t-distribution Random Distribution
+///
+/// @tparam     RealType  Indicates the type of return values
+/// 
+/// @ingroup    MultivariateDistribution
+///
 template <class RealType = double> class mv_t_distribution {
 public:
   // types

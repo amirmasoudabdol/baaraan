@@ -1,6 +1,11 @@
-//
-// Created by Amir Masoud Abdol on 12/03/2020.
-//
+///
+/// Created by Amir Masoud Abdol on 12/03/2020.
+///
+/// @file
+///
+/// @defgroup   RectifiedDistributions Rectified Random Distributions
+/// @brief      List of available rectified random distributions
+/// 
 
 #ifndef BAARAAN_RECTIFIED_NORMAL_DISTRIBUTION_H
 #define BAARAAN_RECTIFIED_NORMAL_DISTRIBUTION_H
@@ -13,6 +18,14 @@ using boost::math::normal;
 
 namespace baaraan {
 
+///
+/// @brief      Rectified Normal Distribution
+///
+/// @tparam     RealType  Indicates the type of return values
+/// 
+/// @ingroup    UnivariateDistributions
+/// @ingroup    RectifiedDistributions
+///
 template <class RealType = double> class rectified_normal_distribution {
 public:
   // types

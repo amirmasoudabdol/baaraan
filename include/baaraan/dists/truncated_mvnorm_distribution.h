@@ -1,6 +1,13 @@
-//
-// Created by Amir Masoud Abdol on 23/10/2019.
-//
+///
+/// Created by Amir Masoud Abdol on 23/10/2019.
+///
+/// @file
+/// This file contains the implementation of truncated normal random
+/// distribution.
+/// 
+/// @defgroup   TruncatedDistributions Truncated Random Distributions
+/// @brief      List of truncated random distributions
+/// 
 
 #ifndef BAARAAN_TRUNCATED_MVNORM_DISTRIBUTION_H
 #define BAARAAN_TRUNCATED_MVNORM_DISTRIBUTION_H
@@ -14,7 +21,14 @@ using boost::math::normal;
 
 namespace baaraan {
 
-// Truncated Normal Distribution
+///
+/// @brief      Truncated Normal Distribution
+///             
+/// @tparam     RealType  Indicates the type of return values
+/// 
+/// @ingroup    TruncatedDistributions
+/// @ingroup    MultivariateDistributions
+///
 template <class RealType = double> class truncated_mvnorm_distribution {
 public:
   // types
