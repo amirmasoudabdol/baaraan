@@ -92,12 +92,17 @@ target_link_libraries(rain baaraan)
 
 # Misc.
 
+## License 
+
+Baaraan project is licensed under the [Apache License 2.0](https://opensource.org/licenses/Apache-2.0).
+
 ## TODO
 
 - [ ] Implement more tests
 - [ ] Implement more distributions
 - [ ] Add more documentations
 - [ ] Add more examples
+- [ ] Add support for single header include
 
 ## Support
 

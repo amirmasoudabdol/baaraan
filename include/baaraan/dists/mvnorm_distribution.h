@@ -1,9 +1,9 @@
-//
-// Created by Amir Masoud Abdol on 2019-06-14.
-//
+///
+/// Created by Amir Masoud Abdol on 2019-06-14.
+///
 /// \file
-/// This file contains the implementation of the multi-variate normal
-/// random distribution
+/// This file contains the implementation of the multivariate normal
+/// random distribution, a.k.a, mvnorm
 
 #ifndef BAARAAN_MVNORM_DISTRIBUTION_H
 #define BAARAAN_MVNORM_DISTRIBUTION_H
@@ -25,7 +25,6 @@ public:
     vector_type means_;
     matrix_type sigma_;
 
-  private:
     matrix_type covs_lower_;
     matrix_type inv_covs_lower_;
     matrix_type inv_covs_;

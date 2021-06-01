@@ -1,0 +1,10 @@
+pymdown-extensions
+plantuml_markdown
+mkdocs
+mkdocs-material
+mkdocs-material-extensions
+mkdocs-git-revision-date-plugin
+mkdocs-bibtex
+mkdocs-img2fig-plugin
+mkdocs-minify-plugin
+mkdocs-simple-hooks
