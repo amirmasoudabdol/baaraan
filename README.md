@@ -34,6 +34,16 @@ For full documentation and implementation details please visit, [baaraan.amirmas
 
 ## Installation
 
+You can add the entire baaraan source tree to your project and therefore use CMake's `add_subdirectory` command to integrate it to your project. So, after copying baaraan to `your-project/baaraan`, your `CMakeLists.txt` should look like this.
+
+```cmake
+add_subdirectory(baaraan)
+
+include_directories(baaraan/include/)
+
+target_link_libraries(your-project baaraan) 
+```
+
 Alternatively, you can build and install baaraan first, and use CMake's `find_package` command to add it to your project:
 
 ```bash
