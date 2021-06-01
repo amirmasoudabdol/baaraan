@@ -20,6 +20,8 @@ namespace baaraan {
 
 ///
 /// @brief      Multivariate Normal Random Distribution
+/// 
+/// Implementation of multivariate normal random distribution
 ///
 /// @tparam     RealType  Indicates the type of return values
 /// 
@@ -31,6 +33,9 @@ public:
   typedef arma::Mat<RealType> matrix_type;
   typedef arma::Col<RealType> vector_type;
 
+  ///
+  /// @brief      Multivariate Normal Distribution Parameter Type
+  ///
   class param_type {
     size_t dims_;
     vector_type means_;
@@ -60,15 +65,18 @@ public:
 
       if (!sigma.is_symmetric() || !sigma.is_square())
         throw std::logic_error(
-            "Covarinace matrix is not square or symmetrical.");
+            "Covariance matrix is not square or symmetrical.");
 
       factorize_covariance();
     }
 
+    //! Returns the dimension of the distribution
     size_t dims() const { return dims_; }
 
+    //! Returns the mean vector of the distribution
     vector_type means() const { return means_; }
 
+    //! Returns the covariance matrix of the distribution
     matrix_type sigma() const { return sigma_; }
 
     matrix_type covs_lower() const { return covs_lower_; }
@@ -93,8 +101,22 @@ private:
 public:
   // constructor and reset functions
 
+  ///
+  /// @brief      Construct an instance of the multivariate normal random 
+  /// distribution by accepting an instance of mvnorm_distribution::param_type 
+  /// struct.
+  ///
+  /// @param[in]  p     
+  ///
   explicit mvnorm_distribution(const param_type &p) : p_(p) {}
 
+  ///
+  /// @brief      Constructs an instance of the multivariate normal random 
+  /// distribution by accepting a vector of means, and a covariance matrix.
+  ///
+  /// @param[in]  means  The mean vector.
+  /// @param[in]  sigma  The covariance matrix.
+  ///
   explicit mvnorm_distribution(vector_type means, matrix_type sigma)
       : p_(param_type(means, sigma)) {}
 

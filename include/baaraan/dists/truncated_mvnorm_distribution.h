@@ -51,6 +51,8 @@ public:
 
       dims_ = means.n_elem;
 
+      // @todo Check if lower is actually lower than the upper
+
       // Checking whether dimensions matches
       if (lowers_.n_elem != dims_ || uppers_.n_elem != dims_)
         throw std::length_error("Check your arrays size");
@@ -107,11 +109,26 @@ private:
   }
 
 public:
-  // constructor and reset functions
+  ///
+  /// @brief      Constructs an instance of the truncated multivariate normal 
+  /// random distribution by accepting its individual parameters
+  ///
+  /// @param[in]  means   The mean vector
+  /// @param[in]  sigma   The covariance matrix
+  /// @param[in]  lowers  The vector of values indicating lower truncation bound
+  /// @param[in]  uppers  The vector of values indicating upper truncation bound
+  ///
   explicit truncated_mvnorm_distribution(vector_type means, matrix_type sigma,
                                          vector_type lowers, vector_type uppers)
       : p_(param_type(means, sigma, lowers, uppers)) {}
 
+  ///
+  /// @brief      Constructs an instance of the truncated multivariate normal 
+  /// random distribution by accepting an initialized 
+  /// truncated_mvnorm_distribution::param_type.
+  ///
+  /// @param[in]  p     
+  ///
   explicit truncated_mvnorm_distribution(const param_type &p) : p_(p) {}
 
   void reset() { uniform.reset(); };

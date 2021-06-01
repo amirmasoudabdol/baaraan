@@ -1,9 +1,12 @@
 [![macOS](https://github.com/amirmasoudabdol/baaraan/workflows/macOS/badge.svg)](https://github.com/amirmasoudabdol/baaraan/actions?query=workflow%3AmacOS)
 [![Ubuntu](https://github.com/amirmasoudabdol/baaraan/workflows/Ubuntu/badge.svg)](https://github.com/amirmasoudabdol/baaraan/actions?query=workflow%3AUbuntu)
 
-<img src="docs/img/logo.png" width="250" align="right"/>
 
 > 🚨 **Disclaimer:** I am in the process of testing and open-sourcing baaraan, please do not use it in production unless you have done the test yourself! 
+> 
+> Please let me know if you ran into any problems or have any suggestions! 😊 🙏🏼
+
+<img src="docs/img/logo.png" width="250" align="right"/>
 
 # Baaraan
 

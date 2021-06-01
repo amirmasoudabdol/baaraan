@@ -66,13 +66,27 @@ private:
   std::uniform_real_distribution<> uniform_;
 
 public:
-  // constructors and reset functions
+  ///
+  /// @brief      Constructs a Truncated Normal Distribution by accpting its 
+  /// underlying parameters.
+  ///
+  /// @param[in]  mean    The mean value
+  /// @param[in]  stddev  The standard deviation value
+  /// @param[in]  lower   The lower truncation bound
+  /// @param[in]  upper   The upper truncation bound
+  ///
   explicit truncated_normal_distribution(result_type mean = 0,
                                          result_type stddev = 1,
                                          result_type lower = -4,
                                          result_type upper = 4)
       : p_(param_type(mean, stddev, lower, upper)) {}
 
+  ///
+  /// @brief      Constructs a Truncated Normal Distribution by accpting an 
+  /// instance of truncated_normal_distribution::param_type
+  ///
+  /// @param[in]  p     
+  ///
   explicit truncated_normal_distribution(const param_type &p) : p_(p) {}
 
   void reset() { uniform_.reset(); }

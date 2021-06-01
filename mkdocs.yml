@@ -1,10 +1,9 @@
 site_name: BAARAAN
 
 nav:
-  # - Home: index.md
-  - API:
-    - Classes: doxygen/Classes
-    - Modules: doxygen/Modules
+  - Home: index.md
+  - Classes: doxygen/Classes
+  - Modules: doxygen/Modules
 
 
 theme:

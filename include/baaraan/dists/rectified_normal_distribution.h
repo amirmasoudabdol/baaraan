@@ -59,11 +59,24 @@ private:
   std::normal_distribution<> norm_;
 
 public:
-  // constructors and reset functions
+  ///
+  /// @brief      Constructs an instance Rectified Normal Distribution by 
+  /// accepting a mean and standard deviation of the underlying univariate 
+  /// normal distribution.
+  ///
+  /// @param[in]  mean    The mean of the normal distribution
+  /// @param[in]  stddev  The stddev of the normal distribution
+  ///
   explicit rectified_normal_distribution(result_type mean = 0,
                                          result_type stddev = 1)
       : p_(param_type(mean, stddev)), norm_(std::normal_distribution<>::param_type{mean, stddev}) {}
 
+  ///
+  /// @brief      Constructs an instance Rectified Normal Distribution by 
+  /// accepting an instance of rectified_normal_distribution::param_type.
+  ///
+  /// @param[in]  p     
+  ///
   explicit rectified_normal_distribution(const param_type &p) : p_(p) {}
 
   void reset() { norm_.reset(); }

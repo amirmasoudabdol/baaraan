@@ -16,7 +16,7 @@
 namespace baaraan {
 
 ///
-/// @brief      Multivariate t-distribution Random Distribution
+/// @brief      Multivariate t-student Random Distribution
 ///
 /// @tparam     RealType  Indicates the type of return values
 /// 
@@ -28,6 +28,9 @@ public:
   typedef arma::Mat<RealType> matrix_type;
   typedef arma::Col<RealType> vector_type;
 
+  ///
+  /// @brief      Parameters of the Multivariate t-student Distribution
+  ///
   class param_type {
     size_t dims_;
     int dof_;
@@ -99,8 +102,23 @@ private:
 public:
   // constructor and reset functions
 
+  ///
+  /// @brief      Constructs an instance of Truncated Multivariate 
+  /// t-student Random Distribution by accepting an instance of 
+  /// mv_t_distribution::param_type.
+  ///
+  /// @param[in]  p     
+  ///
   explicit mv_t_distribution(const param_type &p) : p_(p) {}
 
+  ///
+  /// @brief      Constructs an instance of Truncated Multivariate 
+  /// t-student Random Distribution by accepting its underlying parameters.
+  /// 
+  /// @param[in]  dof    The degree of freedom of the t-distribution
+  /// @param[in]  means  The means vector 
+  /// @param[in]  sigma  The covariance matrix
+  ///
   explicit mv_t_distribution(double dof, vector_type means, matrix_type sigma)
       : p_(param_type(dof, means, sigma)) {}
 
