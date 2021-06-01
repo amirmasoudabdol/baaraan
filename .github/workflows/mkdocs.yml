@@ -13,9 +13,30 @@ jobs:
         with:
           python-version: 3.x
       - run: |
-          sudo apt-get install -y doxygen
+          brew install doxygen
           doxygen
       - run: |
-          pip install -r requirements.txt
+          brew install vcpkg
+          # Clone the project
+          git clone https://github.com/matusnovak/doxybook2.git
+          cd doxybook2
+
+          # Install dependencies via vcpkg
+          # The 'vcpkg.txt' file contains the list of dependencies to install
+          vcpkg install --triplet x64-linux $(cat vcpkg.txt)
+
+          # Configure the project and use vcpkg toolchain
+          mkdir build
+          cmake -B ./build -G "Unix Makefiles" \
+              -DCMAKE_BUILD_TYPE=MinSizeRel \
+              -DCMAKE_TOOLCHAIN_FILE=/usr/local/share/vcpkg/scripts/buildsystems/vcpkg.cmake
+              ..
+
+          # Build it
+          cmake --build ./build --config MinSizeRel
+
+          # Done!
+          ./build/MinSizeRel/doxybook2 -i ../doxygen/xml -o ../docs/doxygen -c Doxybook
       - run: |
+          pip install -r requirements.txt
           mkdocs gh-deploy --force
