@@ -33,7 +33,7 @@ For the actual probability distribution implementation, i.e., density, probabili
 
 ## Documentation
 
-For full documentation and implementation details please visit, [baaraan.amirmasoudabdol.name](https://baaraan.amirmasoudabdol.name).
+For full documentation and implementation details please visit, [https://baaraan.amirmasoudabdol.name](https://baaraan.amirmasoudabdol.name).
 
 ## Installation
 
