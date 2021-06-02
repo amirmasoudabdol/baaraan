@@ -1,0 +1,17 @@
+h1, h2, h3, h4, h5, h6 {
+	font-weight: bold !important;
+}
+
+p {
+	font-weight: 500 !important;
+	text-align: justify;
+}
+
+code, pre {
+	font-family: ui-monospace, Menlo !important;
+	font-weight: 600 !important;
+}
+
+pre#__code_0 {
+  	font-weight: 600 !important;
+}
