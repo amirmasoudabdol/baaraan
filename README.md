@@ -119,6 +119,10 @@ Baaraan project is licensed under the [Apache License 2.0](https://opensource.or
 - [ ] Add support for single header include
 - [ ] Implement some concurrent random number generation 
 
+## Contribution
+
+As I mentioned, this is an experimental library and I am still working on its design and future plan. Please feel free to open an [issue](https://github.com/amirmasoudabdol/baaraan/issues), or maybe a [discussion thread](https://github.com/amirmasoudabdol/baaraan/discussions) if you have any ideas/requests regarding the library.
+
 ## Support
 
 If you enjoy using `baaraan`, please consider supporting it on [GitHub](https://github.com/sponsors/amirmasoudabdol). You can sponsor me monthly, or make a one-time donation! 🤗
