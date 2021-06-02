@@ -42,6 +42,9 @@ extra:
     - icon: fontawesome/brands/github
       link: https://github.com/amirmasoudabdol
 
+extra_css: 
+  - custom.css
+
 copyright: Copyright &copy; 2021 Amir Masoud Abdol
 
 custom_dir: overrides
