@@ -6,3 +6,12 @@ p {
 	font-weight: 500 !important;
 	text-align: justify;
 }
+
+code, pre {
+	font-family: ui-monospace, Menlo !important;
+	font-weight: 600 !important;
+}
+
+pre#__code_0 {
+  	font-weight: 600 !important;
+}
