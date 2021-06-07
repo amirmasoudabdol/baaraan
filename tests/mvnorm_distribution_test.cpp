@@ -18,17 +18,17 @@ using namespace baaraan;
 BOOST_AUTO_TEST_CASE( mvnorm_means_test )
 {
 
-  arma::Col<RealType> tmeans {1, 1, 1};
-  arma::Mat<RealType> tsigma{{1, 0, 0}, {0, 1, 0}, {0, 0, 1}};
+  arma::Col<double> tmeans {1, 1, 1};
+  arma::Mat<double> tsigma{{1, 0, 0}, {0, 1, 0}, {0, 0, 1}};
   mvnorm_distribution<double> mvnorm{tmeans, tsigma};
 
   std::mt19937 gen(42);
 
-  arma::Mat<RealType> sample(3, 10000);
+  arma::Mat<double> sample(3, 10000);
 
-  sample.each_col([&](arma::Col<RealType> &v){v = mvnorm(gen);});
+  sample.each_col([&](arma::Col<double> &v){v = mvnorm(gen);});
 
-  arma::Col<RealType> means = arma::mean(sample, 1);
+  arma::Col<double> means = arma::mean(sample, 1);
 
   BOOST_CHECK( approx_equal(tmeans, means, "absdiff", 0.01) );
 
@@ -36,17 +36,17 @@ BOOST_AUTO_TEST_CASE( mvnorm_means_test )
 
 BOOST_AUTO_TEST_CASE( mvnorm_stddevs_test )
 {
-  arma::Col<RealType> tmeans {1, 1, 1};
-  arma::Mat<RealType> tsigma{{1, 0, 0}, {0, 1, 0}, {0, 0, 1}};
+  arma::Col<double> tmeans {1, 1, 1};
+  arma::Mat<double> tsigma{{1, 0, 0}, {0, 1, 0}, {0, 0, 1}};
   mvnorm_distribution<double> mvnorm{tmeans, tsigma};
 
   std::mt19937 gen(42);
 
-  arma::Mat<RealType> sample(3, 10000);
+  arma::Mat<double> sample(3, 10000);
 
-  sample.each_col([&](arma::Col<RealType> &v){v = mvnorm(gen);});
+  sample.each_col([&](arma::Col<double> &v){v = mvnorm(gen);});
 
-  arma::Col<RealType> stddevs = arma::stddev(sample, 1, 1);
+  arma::Col<double> stddevs = arma::stddev(sample, 1, 1);
 
   BOOST_CHECK( approx_equal(stddevs, tsigma.diag(), "absdiff", 0.01) );
 }
