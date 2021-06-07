@@ -87,23 +87,23 @@ private:
   std::uniform_real_distribution<> uniform{};
   param_type p_;
 
-  arma::mat sub1(arma::mat x, int i) {
+  arma::Mat<RealType> sub1(arma::Mat<RealType> x, int i) {
     x.shed_col(i);
     x.shed_row(i);
     return x;
   }
 
-  arma::mat sub2(arma::mat x, int a, int b) {
+  arma::Mat<RealType> sub2(arma::Mat<RealType> x, int a, int b) {
     x.shed_col(b);
     return (x.row(a));
   }
 
-  arma::vec negSubCol(arma::vec x, int i) {
+  arma::Col<RealType> negSubCol(arma::Col<RealType> x, int i) {
     x.shed_row(i);
     return (x);
   }
 
-  arma::rowvec negSubRow(arma::rowvec x, int i) {
+  arma::Row<RealType> negSubRow(arma::Row<RealType> x, int i) {
     x.shed_col(i);
     return (x);
   }
@@ -185,30 +185,30 @@ truncated_mvnorm_distribution<RealType>::operator()(
 
   auto n{1};
   auto d = p.dims();
-  arma::mat trace = arma::zeros(n, d); // trace of MCMC chain
+  arma::Mat<RealType> trace = arma::zeros(n, d); // trace of MCMC chain
 
   // draw from U(0,1)
-  arma::vec U(n * d);
+  arma::Col<RealType> U(n * d);
   U.imbue([&]() { return uniform(g); });
 
   auto l{0}; // iterator for U
 
   // calculate conditional standard deviations
-  arma::vec sd(d);
+  arma::Col<RealType> sd(d);
   arma::cube P = arma::zeros(1, d - 1, d);
 
   for (int i = 0; i < d; i++) {
     // partitioning of sigma
-    arma::mat Sigma = sub1(p.sigma(), i);
+    arma::Mat<RealType> Sigma = sub1(p.sigma(), i);
     double sigma_ii = p.sigma()(i, i);
-    arma::rowvec Sigma_i = sub2(p.sigma(), i, i);
+    arma::Row<RealType> Sigma_i = sub2(p.sigma(), i, i);
 
     P.slice(i) = Sigma_i * Sigma.i();
     double p_i = arma::as_scalar(P.slice(i) * Sigma_i.t());
     sd(i) = sqrt(sigma_ii - p_i);
   }
 
-  arma::vec x = p.means();
+  arma::Col<RealType> x = p.means();
 
   // run Gibbs sampler for specified chain length (MCMC chain of n samples)
   for (int j = 0; j < n; j++) {
@@ -217,8 +217,8 @@ truncated_mvnorm_distribution<RealType>::operator()(
     for (int i = 0; i < d; i++) {
 
       // calculation of conditional expectation and conditional variance
-      arma::rowvec slice_i = P.slice(i);
-      arma::vec slice_i_times = slice_i * (negSubCol(x, i) - negSubCol(x, i));
+      arma::Row<RealType> slice_i = P.slice(i);
+      arma::Col<RealType> slice_i_times = slice_i * (negSubCol(x, i) - negSubCol(x, i));
       double slice_i_times_double = arma::as_scalar(slice_i_times);
       double mu_i = p.means()(i) + slice_i_times_double;
 

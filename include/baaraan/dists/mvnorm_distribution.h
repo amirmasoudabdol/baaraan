@@ -199,7 +199,7 @@ typename mvnorm_distribution<RealType>::matrix_type
 mvnorm_distribution<RealType>::operator()(
     URNG &g, const mvnorm_distribution<RealType>::param_type &p, size_t n) {
 
-  arma::mat res(p.dims(), n);
+  arma::Mat<RealType> res(p.dims(), n);
 
   res.each_col([&](vector_type &col) { col = (*this)(g, p); });
 

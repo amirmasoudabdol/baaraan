@@ -37,9 +37,9 @@ public:
     vector_type means_;
     matrix_type sigma_;
 
-    arma::mat covs_lower_;
-    arma::mat inv_covs_lower_;
-    arma::mat inv_covs_;
+    arma::Mat<RealType> covs_lower_;
+    arma::Mat<RealType> inv_covs_lower_;
+    arma::Mat<RealType> inv_covs_;
 
     void factorize_covariance() {
       covs_lower_ = arma::chol(sigma_, "lower");
