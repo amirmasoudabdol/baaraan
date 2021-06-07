@@ -185,7 +185,8 @@ truncated_mvnorm_distribution<RealType>::operator()(
 
   auto n{1};
   auto d = p.dims();
-  arma::Mat<RealType> trace = arma::zeros(n, d); // trace of MCMC chain
+  arma::Mat<RealType> trace;
+  trace.zeros(n, d); // trace of MCMC chain
 
   // draw from U(0,1)
   arma::Col<RealType> U(n * d);
@@ -195,7 +196,8 @@ truncated_mvnorm_distribution<RealType>::operator()(
 
   // calculate conditional standard deviations
   arma::Col<RealType> sd(d);
-  arma::cube P = arma::zeros(1, d - 1, d);
+  arma::Cube<RealType> P;
+  P.zeros(1, d - 1, d);
 
   for (int i = 0; i < d; i++) {
     // partitioning of sigma
